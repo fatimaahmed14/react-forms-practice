@@ -8,6 +8,7 @@ const initialFormState = {
   email: "",
   complaint: "",
   contactType: "phone",
+  giveData: false,
 };
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
   const handleChange = (event) => {
     const targetValue = event.target.value;
     const targetName = event.target.name;
+    const targetChecked = event.target.checked;
 
     if (targetName === "name") {
       setFormState({ ...formState, fullName: targetValue });
@@ -40,6 +42,9 @@ export default function App() {
     }
     if (targetName === "contact") {
       setFormState({ ...formState, contactType: targetValue });
+    }
+    if (targetName === "consent") {
+      setFormState({ ...formState, giveData: targetChecked });
     }
   };
 
@@ -150,7 +155,13 @@ export default function App() {
 
           <label>
             I agree you take my data, and do whatever
-            <input type="checkbox" name="consent" id="consent" />
+            <input
+              type="checkbox"
+              name="consent"
+              id="consent"
+              checked={formState.giveData}
+              onChange={handleChange}
+            />
           </label>
         </div>
         <input type="submit" value="Submit!" />
