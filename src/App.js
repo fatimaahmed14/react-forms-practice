@@ -1,18 +1,41 @@
 import { useState } from "react";
 import "./App.css";
 
+const initialFormState = {
+  fullName : "",
+  address: "",
+  phoneNumber: "",
+  email:"",
+}
+
 export default function App() {
-  
-  //TODO: Add your state fields here
+  const [ formState , setFormState] = useState(initialFormState)
+
+  const handleSubmit = (event) => {
+
+    event.preventDefault()
+    console.log(formState)    
+    setFormState(initialFormState)
+
+  }
+
+  const handleChange = (event) => {
+    const targetValue = event.target.value
+    const targetName = event.target.name
+
+    if(targetName === "name"){
+      setFormState({...formState, fullName : targetValue})
+    }
+  }
 
   return (
     <>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h2>Complaining form!</h2>
         <div className="form__section-left">
           <label>
             Full name
-            <input type="text" name="name" required />
+            <input type="text" name="name" required value={formState.fullName} onChange= {handleChange} />
           </label>
           <label>
             Address
