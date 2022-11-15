@@ -6,6 +6,8 @@ const initialFormState = {
   address: "",
   phoneNumber: "",
   email: "",
+  complaint: "",
+  contactType: "phone",
 };
 
 export default function App() {
@@ -32,6 +34,12 @@ export default function App() {
     }
     if (targetName === "email") {
       setFormState({ ...formState, email: targetValue });
+    }
+    if (targetName === "complaint") {
+      setFormState({ ...formState, complaint: targetValue });
+    }
+    if (targetName === "contact") {
+      setFormState({ ...formState, contactType: targetValue });
     }
   };
 
@@ -88,28 +96,54 @@ export default function App() {
               name="complaint"
               rows="10"
               placeholder="You can complain here"
+              value={formState.complaint}
+              onChange={handleChange}
             ></textarea>
           </label>
 
           <div className="form__radio-group">
             <p>How do you want to be contacted? </p>
             <label>
-              <input type="radio" name="contact" value="phone" />
+              <input
+                type="radio"
+                name="contact"
+                value="phone"
+                checked={formState.contactType === "phone"}
+                onChange={handleChange}
+              />
               Phone
             </label>
 
             <label>
-              <input type="radio" name="contact" value="email" />
+              <input
+                type="radio"
+                name="contact"
+                value="email"
+                checked={formState.contactType === "email"}
+                onChange={handleChange}
+              />
               Email
             </label>
 
             <label>
-              <input type="radio" name="contact" value="post" />
+              <input
+                type="radio"
+                name="contact"
+                value="post"
+                checked={formState.contactType === "post"}
+                onChange={handleChange}
+              />
               Slow Mail
             </label>
 
             <label>
-              <input type="radio" name="contact" value="none" />
+              <input
+                type="radio"
+                name="contact"
+                value="none"
+                checked={formState.contactType === "none"}
+                onChange={handleChange}
+              />
               No contact!
             </label>
           </div>
